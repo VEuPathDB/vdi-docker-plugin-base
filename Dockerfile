@@ -11,7 +11,8 @@ RUN apt-get update \
                   libmodule-install-rdf-perl libxml-parser-perl \
                   libdate-manip-perl libtext-csv-perl \
                   libstatistics-descriptive-perl libtree-dagnode-perl \
-                  libxml-simple-perl
+                  libxml-simple-perl \
+    && ln -s /usr/bin/python3 /usr/bin/python
 
 WORKDIR /gusApp
 WORKDIR /gusApp/gus_home
