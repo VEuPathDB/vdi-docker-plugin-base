@@ -8,7 +8,7 @@ ARG CLINEPIDATA_GIT_COMMIT_SHA=5238bc44754b7db7c1ce82da57e66264e53b3755
 
 RUN apt-get update \
     && apt-get -y install ant git wget unzip libaio1 libjson-perl \
-                  libmodule-install-rdf-perl libxml-parser-perl openjdk-8-jdk \
+                  libmodule-install-rdf-perl libxml-parser-perl \
                   libdate-manip-perl libtext-csv-perl \
                   libstatistics-descriptive-perl libtree-dagnode-perl \
                   libxml-simple-perl
@@ -101,4 +101,4 @@ RUN export ORACLE_DBD_VER=1.83 \
     && make \
     && make install
 
-WORKDIR /work
+WORKDIR /
