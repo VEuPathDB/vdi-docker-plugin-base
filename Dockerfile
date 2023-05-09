@@ -21,6 +21,7 @@ ENV GUS_HOME=/gusApp/gus_home
 ENV PROJECT_HOME=/gusApp/project_home
 ENV PATH=$PROJECT_HOME/install/bin:$PATH
 ENV PATH=$GUS_HOME/bin:$PATH
+ENV PATH=/opt/veupathdb/bin:$PATH
 
 RUN git clone https://github.com/VEuPathDB/install.git \
     && cd install \
