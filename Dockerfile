@@ -1,4 +1,4 @@
-FROM veupathdb/vdi-plugin-handler-server:latest
+FROM veupathdb/vdi-plugin-handler-server:1.0.4
 
 ARG INSTALL_GIT_COMMIT_SHA=05197ebc4eb2046cc16e632b0b5852f21727a209
 ARG CBIL_GIT_COMMIT_SHA=41e17a8c7c61a6ca55fd28bd0f4883c74dcb625c
@@ -11,7 +11,8 @@ RUN apt-get update \
                   libmodule-install-rdf-perl libxml-parser-perl \
                   libdate-manip-perl libtext-csv-perl \
                   libstatistics-descriptive-perl libtree-dagnode-perl \
-                  libxml-simple-perl
+                  libxml-simple-perl \
+    && ln -s /usr/bin/python3 /usr/bin/python
 
 WORKDIR /gusApp
 WORKDIR /gusApp/gus_home

@@ -1,4 +1,4 @@
-IMAGE_NAME := "veupathdb/vdi-plugin-handler-base"
+IMAGE_NAME := "veupathdb/vdi-plugin-base"
 
 default:
 
