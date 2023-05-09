@@ -1,0 +1,75 @@
+#!/usr/bin/perl
+
+use strict;
+
+my ($gusConfigFileName) = @ARGV;
+
+die "
+Make a gus.config file in the specified location, based on environment variables
+
+Usage:  makeGusConfigFile gus_config_file_name
+
+" unless $gusConfigFileName;
+
+die "Output file already exists\n" if -e $gusConfigFileName;
+
+# required env vars
+my @envVars = ('DB_HOST', 'DB_PORT', 'DB_NAME', 'DB_PLATFORM', 'DB_USER', 'DB_PASS');
+
+for my $envVar (@envVars) { die "Missing env variable '$envVar'\n" unless $ENV{$envVar}; }
+
+# write to file in cwd
+open(my $fh, '>', $gusConfigFileName) or die "Cannot open output file: $!";
+
+my $configStr = "
+dbVendor=$ENV{DB_PLATFORM}
+dbiDsn=dbi:$ENV{DB_PLATFORM}:database=$ENV{DB_NAME};host=$ENV{DB_HOST};port=$ENV{DB_PORT}
+databaseLogin=$ENV{DB_USER}
+databasePassword=$ENV{DB_PASS}
+userName=$ENV{DB_USER}
+group=dontcare
+project=$ENV{PROJECT}
+
+# Path to Perl Executable
+perl=/usr/bin/perl
+
+# Path to MD5 Executable
+md5sum=/usr/bin/md5sum
+
+################################################################################
+###   Warning:  Do not change items below here unless you know what you're doing
+################################################################################
+
+gusSchemas=Core,RAD,DoTS,SRes,TESS,prot,study
+# gusSchemas=Core,DoTS,SRes,Study,Platform,Model,Results # GUS 4.0 candidate schemata
+coreSchemaName=CORE
+
+sequenceStart=1
+
+### Comma-delimited list of housekeeping columns.  In order as they should appear in the tables
+housekeepingColumns=MODIFICATION_DATE,USER_READ,USER_WRITE,GROUP_READ,GROUP_WRITE,OTHER_READ,OTHER_WRITE,ROW_USER_ID,ROW_GROUP_ID,ROW_PROJECT_ID,
+ROW_ALG_INVOCATION_ID
+housekeepingColumnsVer=MODIFICATION_DATE,USER_READ,USER_WRITE,GROUP_READ,GROUP_WRITE,OTHER_READ,OTHER_WRITE,ROW_USER_ID,ROW_GROUP_ID,ROW_PROJECT_
+ID,ROW_ALG_INVOCATION_ID,VERSION_ALG_INVOCATION_ID,VERSION_DATE,VERSION_TRANSACTION_ID
+
+### type,length,precision,nullable
+
+hkspec.MODIFICATION_DATE=DATE,0,0,false
+hkspec.USER_READ=NUMBER,1,0,false
+hkspec.USER_WRITE=NUMBER,1,0,false
+hkspec.GROUP_READ=NUMBER,1,0,false
+hkspec.GROUP_WRITE=NUMBER,1,0,false
+hkspec.OTHER_READ=NUMBER,1,0,false
+hkspec.OTHER_WRITE=NUMBER,1,0,false
+hkspec.ROW_USER_ID=NUMBER,12,0,false
+hkspec.ROW_GROUP_ID=NUMBER,4,0,false
+hkspec.ROW_PROJECT_ID=NUMBER,4,0,false
+hkspec.ROW_ALG_INVOCATION_ID=NUMBER,12,0,false
+
+hkspec.VERSION_ALG_INVOCATION_ID=NUMBER,12,0,true
+hkspec.VERSION_DATE=DATE,0,0,true
+hkspec.VERSION_TRANSACTION_ID=NUMBER,12,0,true
+";
+
+print $fh $configStr;
+
