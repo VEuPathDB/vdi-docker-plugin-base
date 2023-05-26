@@ -1,0 +1,6 @@
+= VDI Plugin Base
+
+Base Docker image for VDI plugin images.
+
+See: https://github.com/VEuPathDB/vdi-plugin-example/blob/main/Dockerfile for a
+usage example.
