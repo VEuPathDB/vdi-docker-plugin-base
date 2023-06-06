@@ -1,4 +1,4 @@
-FROM veupathdb/vdi-plugin-handler-server:1.0.6
+FROM veupathdb/vdi-plugin-handler-server:1.0.7
 
 ARG INSTALL_GIT_COMMIT_SHA=05197ebc4eb2046cc16e632b0b5852f21727a209
 ARG CBIL_GIT_COMMIT_SHA=41e17a8c7c61a6ca55fd28bd0f4883c74dcb625c
