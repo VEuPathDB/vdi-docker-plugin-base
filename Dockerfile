@@ -104,3 +104,5 @@ RUN export ORACLE_DBD_VER=1.83 \
     && make install
 
 WORKDIR /
+
+COPY lib/ /opt/veupathdb/lib/
