@@ -8,3 +8,6 @@ build:
 		--build-arg=GITHUB_USERNAME=${GITHUB_USERNAME} \
 		--build-arg=GITHUB_TOKEN=${GITHUB_TOKEN} \
 		.
+
+run:
+	@docker run -it --rm $(IMAGE_NAME):latest bash
