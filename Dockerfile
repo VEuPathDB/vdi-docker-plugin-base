@@ -1,4 +1,4 @@
-FROM veupathdb/vdi-plugin-handler-server:3.1.0
+FROM veupathdb/vdi-plugin-handler-server:3.2.0
 
 RUN apt-get update \
     && apt-get -y install python3 \
