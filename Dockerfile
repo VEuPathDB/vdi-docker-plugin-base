@@ -19,18 +19,18 @@ RUN apt-get update \
   \
   && mkdir -p ${JAVA_HOME} \
   && cd ${JAVA_HOME} \
-  && wget -O java.tgz https://corretto.aws/downloads/resources/${JAVA_VERSION}/amazon-corretto-${JAVA_VERSION}-linux-x64.tar.gz \
+  && curl -Lso java.tgz https://corretto.aws/downloads/resources/${JAVA_VERSION}/amazon-corretto-${JAVA_VERSION}-linux-x64.tar.gz \
   && tar -xf java.tgz \
   && rm java.tgz \
-  && mv amazon-corretto-${JAVA_VERSION}-linux-x64/* . \
+  && mv amazon-corretto-${JAVA_VERSION}-linux-x64/* .
 
 ENV PATH=/opt/veupathdb/bin:$PATH
 
 COPY lib/ /opt/veupathdb/lib/
 
 RUN curl "https://github.com/VEuPathDB/vdi-plugin-handler-server/releases/download/${PLUGIN_SERVER_VERSION}/service.jar" \
-    -H "Authorization: Bearer ${GITHUB_TOKEN}" -L -O \
-  && curl "https://raw.githubusercontent.com/VEuPathDB/vdi-plugin-handler-server/refs/tags/${PLUGIN_SERVER_VERSION}/startup.sh" -L -O \
+    -H "Authorization: Bearer ${GITHUB_TOKEN}" -LsO \
+  && curl "https://raw.githubusercontent.com/VEuPathDB/vdi-plugin-handler-server/refs/tags/${PLUGIN_SERVER_VERSION}/startup.sh" -LsO \
   && chmod +x startup.sh
 
 CMD /startup.sh
