@@ -1,13 +1,13 @@
 FROM ubuntu:24.10
 
-ARG GITHUB_TOKEN
-
 ARG PLUGIN_SERVER_VERSION=v8.1.0-rc3
 
 ARG JAVA_VERSION=21.0.6.7.1
 
 ENV JAVA_HOME=/opt/java \
   LANG=en_US.UTF-8 \
+  JVM_MEM_ARGS="-Xms16m -Xmx64m" \
+  JVM_ARGS="" \
   TZ="America/New_York"
 
 RUN apt-get update \
@@ -31,8 +31,7 @@ ENV PATH=/opt/veupathdb/bin:$PATH
 
 COPY lib/ /opt/veupathdb/lib/
 
-RUN curl "https://github.com/VEuPathDB/vdi-plugin-handler-server/releases/download/${PLUGIN_SERVER_VERSION}/service.jar" \
-    -H "Authorization: Bearer ${GITHUB_TOKEN}" -LsO \
+RUN curl "https://github.com/VEuPathDB/vdi-plugin-handler-server/releases/download/${PLUGIN_SERVER_VERSION}/service.jar" -LsO \
   && curl "https://raw.githubusercontent.com/VEuPathDB/vdi-plugin-handler-server/refs/tags/${PLUGIN_SERVER_VERSION}/startup.sh" -LsO \
   && chmod +x startup.sh
 
