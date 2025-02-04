@@ -1,11 +1,8 @@
-FROM ubuntu:24.10
+FROM foxcapades/ubuntu-corretto:24.10-jdk21
 
 ARG PLUGIN_SERVER_VERSION=v8.1.0-rc3
 
-ARG JAVA_VERSION=21.0.6.7.1
-
-ENV JAVA_HOME=/opt/java \
-  LANG=en_US.UTF-8 \
+ENV LANG=en_US.UTF-8 \
   JVM_MEM_ARGS="-Xms16m -Xmx64m" \
   JVM_ARGS="" \
   TZ="America/New_York"
@@ -18,14 +15,7 @@ RUN apt-get update \
   && apt-get install -y tzdata curl wget \
   && cp /usr/share/zoneinfo/America/New_York /etc/localtime \
   && echo ${TZ} > /etc/timezone \
-  && apt-get clean \
-  \
-  && mkdir -p ${JAVA_HOME} \
-  && cd ${JAVA_HOME} \
-  && curl -Lso java.tgz https://corretto.aws/downloads/resources/${JAVA_VERSION}/amazon-corretto-${JAVA_VERSION}-linux-x64.tar.gz \
-  && tar -xf java.tgz \
-  && rm java.tgz \
-  && mv amazon-corretto-${JAVA_VERSION}-linux-x64/* .
+  && apt-get clean
 
 ENV PATH=/opt/veupathdb/bin:$PATH
 
