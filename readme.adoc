@@ -4,3 +4,9 @@ Base Docker image for VDI plugin images.
 
 See: https://github.com/VEuPathDB/vdi-plugin-example/blob/main/Dockerfile for a
 usage example.
+
+== Contents
+
+* Ubuntu 24.10
+* Amazon Corretto JDK 21
+* https://github.com/VEuPathDB/vdi-plugin-handler-server[VDI Plugin Server]
