@@ -1,6 +1,6 @@
 FROM foxcapades/ubuntu-corretto:24.10-jdk21
 
-ARG PLUGIN_SERVER_VERSION=v8.1.0-rc3
+ARG PLUGIN_SERVER_VERSION=v8.1.0-rc4
 
 ENV LANG=en_US.UTF-8 \
   JVM_MEM_ARGS="-Xms16m -Xmx64m" \
