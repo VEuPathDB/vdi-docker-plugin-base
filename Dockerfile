@@ -21,8 +21,8 @@ ENV PATH=/opt/veupathdb/bin:$PATH
 
 COPY lib/ /opt/veupathdb/lib/
 
-RUN curl "https://github.com/VEuPathDB/vdi-plugin-handler-server/releases/download/${PLUGIN_SERVER_VERSION}/service.jar" -LsO \
-  && curl "https://raw.githubusercontent.com/VEuPathDB/vdi-plugin-handler-server/refs/tags/${PLUGIN_SERVER_VERSION}/startup.sh" -LsO \
+RUN curl "https://github.com/VEuPathDB/vdi-plugin-handler-server/releases/download/${PLUGIN_SERVER_VERSION}/service.jar" -LfsO \
+  && curl "https://raw.githubusercontent.com/VEuPathDB/vdi-plugin-handler-server/refs/tags/${PLUGIN_SERVER_VERSION}/startup.sh" -LfsO \
   && chmod +x startup.sh
 
 CMD /startup.sh
