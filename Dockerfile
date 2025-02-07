@@ -1,7 +1,5 @@
 FROM foxcapades/ubuntu-corretto:24.10-jdk21
 
-ARG PLUGIN_SERVER_VERSION=v8.1.0-rc4
-
 ENV LANG=en_US.UTF-8 \
   JVM_MEM_ARGS="-Xms16m -Xmx64m" \
   JVM_ARGS="" \
@@ -21,8 +19,8 @@ ENV PATH=/opt/veupathdb/bin:$PATH
 
 COPY lib/ /opt/veupathdb/lib/
 
-RUN curl "https://github.com/VEuPathDB/vdi-plugin-handler-server/releases/download/${PLUGIN_SERVER_VERSION}/service.jar" -LfsO \
-  && curl "https://raw.githubusercontent.com/VEuPathDB/vdi-plugin-handler-server/refs/tags/${PLUGIN_SERVER_VERSION}/startup.sh" -LfsO \
-  && chmod +x startup.sh
+ARG PLUGIN_SERVER_VERSION=v8.1.0-rc6
+RUN set -o pipefail \
+    && curl "https://github.com/VEuPathDB/vdi-plugin-handler-server/releases/download/${PLUGIN_SERVER_VERSION}/docker-download.sh" -LfO --no-progress-meter | bash
 
 CMD /startup.sh
