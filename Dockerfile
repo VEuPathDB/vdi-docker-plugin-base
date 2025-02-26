@@ -19,7 +19,7 @@ ENV PATH=/opt/veupathdb/bin:$PATH
 
 COPY lib/ /opt/veupathdb/lib/
 
-ARG PLUGIN_SERVER_VERSION=v8.1.0-rc8
+ARG PLUGIN_SERVER_VERSION=v8.1.0
 RUN set -o pipefail \
     && curl "https://github.com/VEuPathDB/vdi-plugin-handler-server/releases/download/${PLUGIN_SERVER_VERSION}/docker-download.sh" -Lf --no-progress-meter | bash
 
